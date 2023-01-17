@@ -27,7 +27,10 @@ export default function Login() {
                 <form onSubmit={enter}>
                     <input onChange={(e) => setEmail(e.target.value)} value={email} type='email' placeholder="E-mail" required></input>
                     <input onChange={(e) => setPassword(e.target.value)} value={password} type='password' placeholder="Senha" required></input>
-                    <button type='submit'>Entrar</button>
+                    <button type='submit' onClick={() => {
+                        navigate('/home')
+                        console.log(email, password)
+                    }}>Entrar</button>
                 </form>
             </Inputs>
             <Register onClick={() => {
