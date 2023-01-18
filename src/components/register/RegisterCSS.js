@@ -18,7 +18,6 @@ input {
     padding: 12px;
     font-size: 20px;
     ::placeholder{
-        font-family: Raleway, sans-serif;
         font-size: 20px;
         color: #000000;
     }
@@ -26,7 +25,6 @@ input {
 button{
     width: 326px;
     height: 46px;
-    font-family: Raleway, sans-serif;
     font-size: 20px;
     color: #FFFFFF;
     font-weight: 700;
@@ -40,7 +38,6 @@ button{
 export const RegisterButton = styled.div`
 color: #ffffff;
 text-align: center;
-font-family: Raleway, sans-serif;
 font-size: 15px;
 font-weight: 700;
 `;

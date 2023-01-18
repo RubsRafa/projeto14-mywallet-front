@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Welcome = styled.div`
 color: #ffffff;
-font-family: Raleway, sans-serif;
 font-weight: 700;
 font-size: 26px;
 `;
@@ -16,18 +15,18 @@ width: 326px;
 height: 446px;
 background-color: #ffffff;
 border-radius: 5px;
-margin: 22px auto;
+margin: 15px auto;
+padding: 4px;
+box-sizing: border-box;
+position: relative;
 `;
 export const Empty = styled.div`
-background-color: black;
-font-family: Raleway, sans-serif;
 font-size: 20px;
 color: #868686;
 text-align: center;
 width: 180px;
-margin: 0 auto;
+margin: 200px auto;
 box-sizing: border-box;
-
 `;
 export const Options = styled.div`
 display: flex;
@@ -45,10 +44,43 @@ img {
     margin: 10px 0 0 10px;
 }
 h1 {
-    font-family: Raleway, sans-serif;
     font-weight: 700;
     font-size: 17px;
     color: #ffffff;
     margin: 32px 60px 0 10px;
+}
+`;
+export const Text = styled.div`
+display: flex;
+font-size: 16px;
+margin-top: 18px;
+justify-content: space-between;
+h3 {
+    margin-right: 10px;
+}
+`;
+export const Unite = styled.div`
+display: flex;
+h1{
+    margin-left: 10px;
+    width: 40px;
+    color: #C6C6C6;
+}
+h2 {
+    margin-left: 10px;
+    color: #000000; 
+}
+`;
+export const Balance = styled.div`
+box-sizing: border-box;
+padding: 5px;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+width: 97%;
+position: absolute;
+bottom: 5px; 
+h1 {
+    font-weight: 700;
 }
 `;

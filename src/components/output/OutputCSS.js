@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Welcome = styled.div`
 color: #ffffff;
-font-family: Raleway, sans-serif;
 font-weight: 700;
 font-size: 26px;
 `;
@@ -25,7 +24,6 @@ input {
     padding: 12px;
     font-size: 20px;
     ::placeholder{
-        font-family: Raleway, sans-serif;
         font-size: 20px;
         color: #000000;
     }
@@ -33,7 +31,6 @@ input {
 button{
     width: 326px;
     height: 46px;
-    font-family: Raleway, sans-serif;
     font-size: 20px;
     color: #FFFFFF;
     font-weight: 700;
