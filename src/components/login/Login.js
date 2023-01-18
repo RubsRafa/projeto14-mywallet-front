@@ -11,12 +11,16 @@ export default function Login() {
 
     function enter (e) {
         e.preventDefault();
-        
+    
         const userLogin = {
             email, 
             password
         }
-        axios.post(`${process.env.REACT_APP_API_URL}`, userLogin)
+        axios.post(`${process.env.REACT_APP_API_URL}/login`, userLogin)
+        .then(() => {
+            navigate('/home')
+        })
+        .catch((err) => console.log(err))
     }
     return (
         <>
@@ -27,10 +31,7 @@ export default function Login() {
                 <form onSubmit={enter}>
                     <input onChange={(e) => setEmail(e.target.value)} value={email} type='email' placeholder="E-mail" required></input>
                     <input onChange={(e) => setPassword(e.target.value)} value={password} type='password' placeholder="Senha" required></input>
-                    <button type='submit' onClick={() => {
-                        navigate('/home')
-                        console.log(email, password)
-                    }}>Entrar</button>
+                    <button type='submit'>Entrar</button>
                 </form>
             </Inputs>
             <Register onClick={() => {
