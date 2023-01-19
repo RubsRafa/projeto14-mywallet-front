@@ -17,7 +17,7 @@ export default function Register() {
         if (password !== confirmation) return; 
 
         const access = { name, email, password, confirmation }
-        axios.post(`${process.env.REACT_APP_API_URL}/registration`, access)
+        axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, access)
         .then(() => navigate('/'))
         .catch((err) => console.log(err))
     }

@@ -12,8 +12,8 @@ export default function Output() {
     function addOutput(e) {
         e.preventDefault(); 
 
-        const outputValue = { value, description };
-        axios.post(`${process.env.REACT_APP_API_URL}/output`, outputValue)
+        const outputValue = { value, description, type: 'output' };
+        axios.post(`${process.env.REACT_APP_API_URL}/entry`, outputValue)
         .then(() => navigate('/home'))
         .catch((err) => console.log(err))
     }

@@ -13,7 +13,7 @@ export default function Home() {
     // const [amount, setAmount] = useState(0); 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/registration`)
+        axios.get(`${process.env.REACT_APP_API_URL}/entry`)
             .then((res) => {
                 if (res.data.length !== 0) {
                     setBalances(res.data)

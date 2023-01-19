@@ -8,6 +8,7 @@ export default function Login() {
     const navigate = useNavigate(); 
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
+    const [token, setToken] = useState('');
 
     function enter (e) {
         e.preventDefault();
@@ -17,7 +18,8 @@ export default function Login() {
             password
         }
         axios.post(`${process.env.REACT_APP_API_URL}/login`, userLogin)
-        .then(() => {
+        .then((res) => {
+            setToken(res.data)
             navigate('/home')
         })
         .catch((err) => console.log(err))

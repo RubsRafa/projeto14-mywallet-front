@@ -12,8 +12,8 @@ export default function Input() {
     function addInput(e) {
         e.preventDefault(); 
 
-        const inputValue = { value, description };
-        axios.post(`${process.env.REACT_APP_API_URL}/input`, inputValue)
+        const inputValue = { value, description, type: 'input' };
+        axios.post(`${process.env.REACT_APP_API_URL}/entry`, inputValue)
         .then(() => navigate('/home'))
         .catch((err) => console.log(err))
     }
