@@ -5,25 +5,30 @@ import Register from './components/register/Register.js';
 import Home from './components/home/Home.js'
 import Input from './components/input/Input.js'
 import Output from './components/output/Output.js';
-
+import Provider from './components/contextAPI/Provider.js'
 
 
 export default function App() {
+
   return (
+
     <BrowserRouter>
 
-    <GlobalStyle />
-    
-    <Routes>
-      
-      <Route path='/' element={<Login />} />
-      <Route path='/cadastro' element={<Register />} />
-      <Route path='/home' element={<Home />} />
-      <Route path='/nova-entrada' element={<Input />} />
-      <Route path='/nova-saida' element={<Output />} />
+      <GlobalStyle />
 
-    </Routes>
+      <Provider>
+        <Routes>
+
+          <Route path='/' element={<Login />} />
+          <Route path='/cadastro' element={<Register />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/nova-entrada' element={<Input />} />
+          <Route path='/nova-saida' element={<Output />} />
+
+        </Routes>
+      </Provider>
     </BrowserRouter>
+
   );
 }
 
