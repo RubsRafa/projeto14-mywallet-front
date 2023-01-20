@@ -3,26 +3,50 @@ import LogOut from '../../img/LogOut.png';
 import Plus from '../../img/plus.png';
 import Minus from '../../img/minus.png';
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import Context from '../contextAPI/Context.js'
 
 
 export default function Home() {
     const navigate = useNavigate();
     const [balances, setBalances] = useState();
-    // const [amount, setAmount] = useState(0); 
+    const { token } = useContext(Context)
+    const [amount, setAmount] = useState([]); 
+    const [sum, setSum] = useState(0);
+    console.log(amount)
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/entry`)
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        axios.get(`${process.env.REACT_APP_API_URL}/entry`, config)
             .then((res) => {
                 if (res.data.length !== 0) {
                     setBalances(res.data)
-                    console.log(res.data)
-                    console.log(res.data.filter((i) => Number(i.value)))
+                    setAmount(res.data.map(i => {
+                        if (i.type === 'input') {
+                            return Number(i.value)*(1)
+                        } else {
+                            return Number(i.value)*(-1)
+                        }
+                    }))
                 } 
             })
-            .catch((err) => console.log(err))
+            .catch((err) => console.log(err.response.data))
     }, [])
+
+    useEffect(() => {
+        let results = 0;
+        for (let i = 0; i < amount.length; i++) {
+            results += amount[i]
+        }
+        setSum(results)
+    },[])
 
     return (
         <>
@@ -56,7 +80,7 @@ export default function Home() {
                 {balances &&
                     <Balance>
                         <h1>SALDO</h1>
-                        <h3>soma</h3>
+                        <h3>{sum}</h3>
                     </Balance>
                 }
 

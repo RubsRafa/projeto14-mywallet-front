@@ -2,7 +2,8 @@ import { createContext } from "react";
 
 const Context = createContext({
     name: null,
-    token: null
+    token: null,
+    id: null
 });
 
 

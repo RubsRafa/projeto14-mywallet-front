@@ -1,14 +1,15 @@
 import { Logo, Inputs, Register } from "./LoginCSS";
 import MyWallet from '../../img/MyWallet.png';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-
+import Context from '../contextAPI/Context.js'
 export default function Login() {
+    const { setToken, setId } = useContext(Context)
+
     const navigate = useNavigate(); 
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
-    const [token, setToken] = useState('');
 
     function enter (e) {
         e.preventDefault();
@@ -19,10 +20,11 @@ export default function Login() {
         }
         axios.post(`${process.env.REACT_APP_API_URL}/login`, userLogin)
         .then((res) => {
-            setToken(res.data)
+            setToken(res.data.token)
+            setId(res.data.id)
             navigate('/home')
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err.response.data))
     }
     return (
         <>

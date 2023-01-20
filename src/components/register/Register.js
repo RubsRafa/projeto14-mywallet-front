@@ -19,7 +19,7 @@ export default function Register() {
         const access = { name, email, password, confirmation }
         axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, access)
         .then(() => navigate('/'))
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err.response.data))
     }
 
     return (

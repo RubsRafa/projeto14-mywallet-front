@@ -16,8 +16,9 @@ height: 446px;
 background-color: #ffffff;
 border-radius: 5px;
 margin: 15px auto;
-padding: 4px;
 box-sizing: border-box;
+overflow-y: hidden;
+overflow-y: scroll;
 position: relative;
 `;
 export const Empty = styled.div`

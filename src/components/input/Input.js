@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Welcome, TopBar, Inputs } from "./InputCSS.js";
+import Context from '../contextAPI/Context.js'
 
 export default function Input() {
+    const { token } = useContext(Context)
 
     const [value, setValue] = useState(); 
     const [description, setDescription] = useState(); 
@@ -12,10 +14,15 @@ export default function Input() {
     function addInput(e) {
         e.preventDefault(); 
 
-        const inputValue = { value, description, type: 'input' };
-        axios.post(`${process.env.REACT_APP_API_URL}/entry`, inputValue)
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+        
+        axios.post(`${process.env.REACT_APP_API_URL}/entry`, { value, description, type: "input" }, config)
         .then(() => navigate('/home'))
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err.response.data))
     }
 
     return (
