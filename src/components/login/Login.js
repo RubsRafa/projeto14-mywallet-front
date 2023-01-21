@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import Context from '../contextAPI/Context.js'
 export default function Login() {
-    const { setToken, setId } = useContext(Context)
+    const { setToken, setName } = useContext(Context)
 
     const navigate = useNavigate(); 
     const [email, setEmail] = useState(''); 
@@ -20,8 +20,9 @@ export default function Login() {
         }
         axios.post(`${process.env.REACT_APP_API_URL}/login`, userLogin)
         .then((res) => {
+            console.log(res)
             setToken(res.data.token)
-            setId(res.data.id)
+            setName(res.data.name)
             navigate('/home')
         })
         .catch((err) => console.log(err.response.data))

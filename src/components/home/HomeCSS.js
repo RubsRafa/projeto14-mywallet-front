@@ -85,4 +85,7 @@ bottom: 5px;
 h1 {
     font-weight: 700;
 }
+h3 {
+    color: ${props => props.cor === 'positive' ? '#03AC00' : '#C70000'}
+}
 `;

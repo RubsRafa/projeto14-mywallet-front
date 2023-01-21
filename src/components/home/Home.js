@@ -11,10 +11,13 @@ import Context from '../contextAPI/Context.js'
 export default function Home() {
     const navigate = useNavigate();
     const [balances, setBalances] = useState();
-    const { token } = useContext(Context)
-    const [amount, setAmount] = useState([]); 
+    const { token, name } = useContext(Context)
+    const [amount, setAmount] = useState([]);
     const [sum, setSum] = useState(0);
-    console.log(amount)
+    const [totalMoney, setTotalMoney] = useState('')
+    // console.log('amount', amount)
+    // console.log('sum', sum)
+    // console.log('totalMoney', totalMoney)
 
     useEffect(() => {
 
@@ -30,28 +33,34 @@ export default function Home() {
                     setBalances(res.data)
                     setAmount(res.data.map(i => {
                         if (i.type === 'input') {
-                            return Number(i.value)*(1)
+                            return Number(i.value) * (1)
                         } else {
-                            return Number(i.value)*(-1)
+                            return Number(i.value) * (-1)
                         }
                     }))
-                } 
+                }
+                calcSum();
             })
             .catch((err) => console.log(err.response.data))
     }, [])
 
-    useEffect(() => {
+    function calcSum() {
         let results = 0;
         for (let i = 0; i < amount.length; i++) {
             results += amount[i]
         }
-        setSum(results)
-    },[])
+        setSum(results.toFixed(2))
+        if (results > 0) {
+            setTotalMoney('positive')
+        } else {
+            setTotalMoney('negative')
+        }
+    }
 
     return (
         <>
             <TopBar>
-                <Welcome>Olá, Estranho</Welcome>
+                <Welcome>Olá, {name}</Welcome>
                 <img onClick={() => {
                     navigate('/')
                 }} src={LogOut} alt='logout' />
@@ -78,7 +87,7 @@ export default function Home() {
                 }
 
                 {balances &&
-                    <Balance>
+                    <Balance cor={totalMoney}>
                         <h1>SALDO</h1>
                         <h3>{sum}</h3>
                     </Balance>
