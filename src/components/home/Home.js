@@ -10,7 +10,7 @@ import Context from '../contextAPI/Context.js'
 
 export default function Home() {
     const navigate = useNavigate();
-    const { token, name, reload, setReload } = useContext(Context)
+    const { token, name, reload, setReload, setItem } = useContext(Context)
 
     const [balances, setBalances] = useState();
     const [amount, setAmount] = useState([]);
@@ -60,8 +60,8 @@ export default function Home() {
 
     function removeEntry(id) {
 
-        if(!window.confirm('Confirmação: gostaria realmente de apagar o registro?')) {
-            return; 
+        if (!window.confirm('Confirmação: gostaria realmente de apagar o registro?')) {
+            return;
         }
         const config = {
             headers: {
@@ -69,10 +69,10 @@ export default function Home() {
             }
         }
         axios.delete(`${process.env.REACT_APP_API_URL}/entry/${id}`, config)
-        .then(() => {
-            setReload(!reload)
-        })
-        .catch((err) => console.log(err))
+            .then(() => {
+                setReload(!reload)
+            })
+            .catch((err) => console.log(err))
     }
 
     return (
@@ -97,7 +97,14 @@ export default function Home() {
                             <Text cor={i.type}>
                                 <Unite>
                                     <h1>{i.date}</h1>
-                                    <h2>{i.description}</h2>
+                                    <h2 onClick={() => {
+                                        setItem(i)
+                                        if (i.type === 'input') {
+                                            navigate('/editar-entrada')
+                                        } else {
+                                            navigate('/editar-saida')
+                                        }
+                                    }}>{i.description}</h2>
                                 </Unite>
                                 <Unite>
                                     <h3>{i.value}</h3>

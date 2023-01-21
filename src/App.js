@@ -6,6 +6,8 @@ import Home from './components/home/Home.js'
 import Input from './components/input/Input.js'
 import Output from './components/output/Output.js';
 import Provider from './components/contextAPI/Provider.js'
+import EditInput from './components/editInput/EditInPut.js';
+import EditOutput from './components/editOutput/EditOutPut.js';
 
 
 export default function App() {
@@ -24,6 +26,9 @@ export default function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/nova-entrada' element={<Input />} />
           <Route path='/nova-saida' element={<Output />} />
+          <Route path='/editar-entrada' element={<EditInput />} />
+          <Route path='/editar-saida' element={<EditOutput />} />
+          
 
         </Routes>
       </Provider>

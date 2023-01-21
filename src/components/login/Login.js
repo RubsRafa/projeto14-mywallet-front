@@ -20,7 +20,6 @@ export default function Login() {
         }
         axios.post(`${process.env.REACT_APP_API_URL}/login`, userLogin)
         .then((res) => {
-            console.log(res)
             setToken(res.data.token)
             setName(res.data.name)
             navigate('/home')

@@ -4,7 +4,8 @@ import Context from "./Context";
 const Provider = ({ children }) => {
     const [name, setName] = useState('');
     const [token, setToken] = useState('');
-    const [reload, setReload] = useState(false)
+    const [reload, setReload] = useState(false);
+    const [item, setItem] = useState(); 
     
     return (
         <Context.Provider value={{
@@ -13,7 +14,9 @@ const Provider = ({ children }) => {
             token,
             setToken,
             reload,
-            setReload
+            setReload,
+            item,
+            setItem
         }}>
             {children}
         </Context.Provider>

@@ -3,7 +3,8 @@ import { createContext } from "react";
 const Context = createContext({
     name: null,
     token: null,
-    reload: null
+    reload: null,
+    item: null
 });
 
 
