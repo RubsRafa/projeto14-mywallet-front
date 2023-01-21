@@ -5,7 +5,7 @@ import axios from "axios";
 import Context from "../contextAPI/Context.js";
 
 export default function EditOutput() {
-    const { token, item } = useContext(Context)
+    const { token, item, reload, setReload } = useContext(Context)
 
     const [value, setValue] = useState(item.value); 
     const [description, setDescription] = useState(item.description); 
@@ -19,10 +19,12 @@ export default function EditOutput() {
                 Authorization: `Bearer ${token}`
             }
         }
-        console.log(value, description)
 
         axios.put(`${process.env.REACT_APP_API_URL}/entry/${item._id}`, { value, description, type: 'output' }, config)
-        .then(() => navigate('/home'))
+        .then(() => {
+            setReload(!reload)
+            navigate('/home')
+        })
         .catch((err) => console.log(err.response.data))
     }
 
@@ -33,7 +35,7 @@ export default function EditOutput() {
             </TopBar>
             <Inputs>
                 <form onSubmit={editOutput}>
-                    <input onChange={(e) => setValue(e.target.value)} value={value} type='number' step=".00" placeholder="Valor" required></input>
+                    <input onChange={(e) => setValue(e.target.value)} value={value} type='number' step=".01" placeholder="Valor" required></input>
                     <input onChange={(e) => setDescription(e.target.value)} value={description} type='text' placeholder="Descrição" required></input>
                     <button type='submit'>Atualizar saída</button>
                 </form>

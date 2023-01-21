@@ -5,7 +5,7 @@ import { Welcome, TopBar, Inputs } from "./EditInPutCSS";
 import Context from '../contextAPI/Context.js'
 
 export default function EditInput() {
-    const { token, item } = useContext(Context)
+    const { token, item, reload, setReload } = useContext(Context)
 
     const [value, setValue] = useState(item.value); 
     const [description, setDescription] = useState(item.description); 
@@ -19,10 +19,12 @@ export default function EditInput() {
                 Authorization: `Bearer ${token}`
             }
         };
-        console.log(value, description)
         
         axios.put(`${process.env.REACT_APP_API_URL}/entry/${item._id}`, { value, description, type: "input" }, config)
-        .then(() => navigate('/home'))
+        .then(() => {
+            setReload(!reload)
+            navigate('/home')
+        })
         .catch((err) => console.log(err.response.data))
     }
 

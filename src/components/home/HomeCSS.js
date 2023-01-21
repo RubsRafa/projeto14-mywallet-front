@@ -60,7 +60,8 @@ h3 {
     color: ${props => props.cor === 'input' ? '#03AC00' : '#C70000'}
 }
 h4{
-    margin-right: 4px;
+    margin-right: 8px;
+    color: #C6C6C6;
 }
 `;
 export const Unite = styled.div`
@@ -77,13 +78,14 @@ h2 {
 `;
 export const Balance = styled.div`
 box-sizing: border-box;
-padding: 5px;
+padding: 10px;
 display: flex;
 justify-content: space-between;
 align-items: flex-end;
 width: 326px;
 position: fixed;
-bottom: 160px; 
+bottom: 155px; 
+border-radius: 5px;
 background-color: rgba(255, 255, 255, 0.9);
 h1 {
     font-weight: 700;

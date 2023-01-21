@@ -5,7 +5,7 @@ import axios from "axios";
 import Context from "../contextAPI/Context.js";
 
 export default function Output() {
-    const { token } = useContext(Context)
+    const { token, reload, setReload } = useContext(Context)
 
     const [value, setValue] = useState(); 
     const [description, setDescription] = useState(); 
@@ -21,7 +21,10 @@ export default function Output() {
         }
 
         axios.post(`${process.env.REACT_APP_API_URL}/entry`, { value, description, type: 'output' }, config)
-        .then(() => navigate('/home'))
+        .then(() => {
+            setReload(!reload)
+            navigate('/home')
+        })
         .catch((err) => console.log(err.response.data))
     }
 

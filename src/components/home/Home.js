@@ -15,11 +15,7 @@ export default function Home() {
     const [balances, setBalances] = useState();
     const [amount, setAmount] = useState([]);
     const [sum, setSum] = useState(0);
-    const [totalMoney, setTotalMoney] = useState('')
-    // console.log('amount', amount)
-    // console.log('sum', sum)
-    // console.log('totalMoney', totalMoney)
-
+    const [totalMoney, setTotalMoney] = useState('');
     useEffect(() => {
 
         const config = {
@@ -30,6 +26,7 @@ export default function Home() {
 
         axios.get(`${process.env.REACT_APP_API_URL}/entry`, config)
             .then((res) => {
+                setBalances(false)
                 if (res.data.length !== 0) {
                     setBalances(res.data)
                     setAmount(res.data.map(i => {
@@ -43,19 +40,22 @@ export default function Home() {
                 calcSum();
             })
             .catch((err) => console.log(err.response.data))
+            // eslint-disable-next-line
     }, [reload])
 
     function calcSum() {
         let results = 0;
         for (let i = 0; i < amount.length; i++) {
             results += amount[i];
+            setSum(results.toFixed(2))
         }
-        setSum(results.toFixed(2))
-        if (results >= 0 || sum >= 0) {
+        
+        if (results >= 0) {
             setTotalMoney('positive')
         } else {
             setTotalMoney('negative')
         }
+        // setReload(!reload)
     }
 
     function removeEntry(id) {
@@ -93,8 +93,8 @@ export default function Home() {
                     }
 
                     {balances && (
-                        balances.map((i) => (
-                            <Text cor={i.type}>
+                        balances.map((i, index) => (
+                            <Text key={index} cor={i.type}>
                                 <Unite>
                                     <h1>{i.date}</h1>
                                     <h2 onClick={() => {
