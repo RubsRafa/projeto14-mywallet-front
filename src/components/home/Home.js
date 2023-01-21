@@ -10,14 +10,15 @@ import Context from '../contextAPI/Context.js'
 
 export default function Home() {
     const navigate = useNavigate();
+    const { token, name, reload, setReload } = useContext(Context)
+
     const [balances, setBalances] = useState();
-    const { token, name } = useContext(Context)
     const [amount, setAmount] = useState([]);
     const [sum, setSum] = useState(0);
     const [totalMoney, setTotalMoney] = useState('')
-    console.log('amount', amount)
-    console.log('sum', sum)
-    console.log('totalMoney', totalMoney)
+    // console.log('amount', amount)
+    // console.log('sum', sum)
+    // console.log('totalMoney', totalMoney)
 
     useEffect(() => {
 
@@ -42,7 +43,7 @@ export default function Home() {
                 calcSum();
             })
             .catch((err) => console.log(err.response.data))
-    }, [])
+    }, [reload])
 
     function calcSum() {
         let results = 0;
@@ -55,6 +56,23 @@ export default function Home() {
         } else {
             setTotalMoney('negative')
         }
+    }
+
+    function removeEntry(id) {
+
+        if(!window.confirm('Confirmação: gostaria realmente de apagar o registro?')) {
+            return; 
+        }
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        axios.delete(`${process.env.REACT_APP_API_URL}/entry/${id}`, config)
+        .then(() => {
+            setReload(!reload)
+        })
+        .catch((err) => console.log(err))
     }
 
     return (
@@ -81,7 +99,10 @@ export default function Home() {
                                     <h1>{i.date}</h1>
                                     <h2>{i.description}</h2>
                                 </Unite>
-                                <h3>{i.value}</h3>
+                                <Unite>
+                                    <h3>{i.value}</h3>
+                                    <h4 onClick={() => removeEntry(i._id)}>x</h4>
+                                </Unite>
                             </Text>
                         ))
                     )

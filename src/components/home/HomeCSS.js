@@ -56,8 +56,11 @@ font-size: 16px;
 margin-top: 18px;
 justify-content: space-between;
 h3 {
-    margin-right: 10px;
+    margin-right: 6px;
     color: ${props => props.cor === 'input' ? '#03AC00' : '#C70000'}
+}
+h4{
+    margin-right: 4px;
 }
 `;
 export const Unite = styled.div`
