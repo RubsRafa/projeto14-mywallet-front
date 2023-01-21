@@ -19,7 +19,6 @@ margin: 15px auto;
 box-sizing: border-box;
 overflow-y: hidden;
 overflow-y: scroll;
-position: relative;
 `;
 export const Empty = styled.div`
 font-size: 20px;
@@ -79,13 +78,17 @@ padding: 5px;
 display: flex;
 justify-content: space-between;
 align-items: flex-end;
-width: 97%;
-position: absolute;
-bottom: 5px; 
+width: 326px;
+position: fixed;
+bottom: 160px; 
+background-color: rgba(255, 255, 255, 0.9);
 h1 {
     font-weight: 700;
 }
 h3 {
     color: ${props => props.cor === 'positive' ? '#03AC00' : '#C70000'}
 }
+`;
+export const Agroup = styled.div`
+margin-bottom: 40px;
 `;

@@ -1,4 +1,4 @@
-import { Welcome, TopBar, Registers, Empty, Options, Option, Text, Unite, Balance } from "./HomeCSS";
+import { Welcome, TopBar, Registers, Empty, Options, Option, Text, Unite, Balance, Agroup } from "./HomeCSS";
 import LogOut from '../../img/LogOut.png';
 import Plus from '../../img/plus.png';
 import Minus from '../../img/minus.png';
@@ -15,9 +15,9 @@ export default function Home() {
     const [amount, setAmount] = useState([]);
     const [sum, setSum] = useState(0);
     const [totalMoney, setTotalMoney] = useState('')
-    // console.log('amount', amount)
-    // console.log('sum', sum)
-    // console.log('totalMoney', totalMoney)
+    console.log('amount', amount)
+    console.log('sum', sum)
+    console.log('totalMoney', totalMoney)
 
     useEffect(() => {
 
@@ -47,10 +47,10 @@ export default function Home() {
     function calcSum() {
         let results = 0;
         for (let i = 0; i < amount.length; i++) {
-            results += amount[i]
+            results += amount[i];
         }
         setSum(results.toFixed(2))
-        if (results > 0) {
+        if (results >= 0 || sum >= 0) {
             setTotalMoney('positive')
         } else {
             setTotalMoney('negative')
@@ -66,25 +66,28 @@ export default function Home() {
                 }} src={LogOut} alt='logout' />
             </TopBar>
             <Registers>
+                <Agroup>
 
-                {!balances &&
-                    <Empty>
-                        <h1>Não há registros de entrada ou saída</h1>
-                    </Empty>
-                }
+                    {!balances &&
+                        <Empty>
+                            <h1>Não há registros de entrada ou saída</h1>
+                        </Empty>
+                    }
 
-                {balances && (
-                    balances.map((i) => (
-                        <Text cor={i.type}>
-                            <Unite>
-                                <h1>{i.date}</h1>
-                                <h2>{i.description}</h2>
-                            </Unite>
-                            <h3>{i.value}</h3>
-                        </Text>
-                    ))
-                )
-                }
+                    {balances && (
+                        balances.map((i) => (
+                            <Text cor={i.type}>
+                                <Unite>
+                                    <h1>{i.date}</h1>
+                                    <h2>{i.description}</h2>
+                                </Unite>
+                                <h3>{i.value}</h3>
+                            </Text>
+                        ))
+                    )
+                    }
+
+                </Agroup>
 
                 {balances &&
                     <Balance cor={totalMoney}>
