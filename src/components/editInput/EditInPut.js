@@ -7,8 +7,8 @@ import Context from '../contextAPI/Context.js'
 export default function EditInput() {
     const { token, item } = useContext(Context)
 
-    const [value, setValue] = useState(); 
-    const [description, setDescription] = useState(); 
+    const [value, setValue] = useState(item.value); 
+    const [description, setDescription] = useState(item.description); 
     const navigate = useNavigate(); 
 
     function editInput(e) {
@@ -33,8 +33,8 @@ export default function EditInput() {
             </TopBar>
             <Inputs>
                 <form onSubmit={editInput}>
-                    <input onChange={(e) => setValue(e.target.value)} value={value ? value : item.value} type='number' step=".01" placeholder="Valor" required></input>
-                    <input onChange={(e) => setDescription(e.target.value)} value={description ? description : item.description} type='text' placeholder="Descrição" required></input>
+                    <input onChange={(e) => setValue(e.target.value)} value={value} type='number' step=".01" placeholder="Valor" required></input>
+                    <input onChange={(e) => setDescription(e.target.value)} value={description} type='text' placeholder="Descrição" required></input>
                     <button type='submit'>Atualizar entrada</button>
                 </form>
             </Inputs>
