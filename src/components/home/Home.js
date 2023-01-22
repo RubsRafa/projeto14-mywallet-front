@@ -13,9 +13,9 @@ export default function Home() {
     const { token, name, reload, setReload, setItem } = useContext(Context)
 
     const [balances, setBalances] = useState();
-    const [amount, setAmount] = useState([]);
     const [sum, setSum] = useState(0);
     const [totalMoney, setTotalMoney] = useState('');
+
     useEffect(() => {
 
         const config = {
@@ -26,37 +26,22 @@ export default function Home() {
 
         axios.get(`${process.env.REACT_APP_API_URL}/entry`, config)
             .then((res) => {
+                console.log(res.data)
                 setBalances(false)
-                if (res.data.length !== 0) {
-                    setBalances(res.data)
-                    setAmount(res.data.map(i => {
-                        if (i.type === 'input') {
-                            return Number(i.value) * (1)
-                        } else {
-                            return Number(i.value) * (-1)
-                        }
-                    }))
+                setSum(0)
+                if (res.data.myEntry.length !== 0) {
+                    setBalances(res.data.myEntry)
+                    setSum(res.data.results)
                 }
-                calcSum();
+                if (res.data.results >= 0) {
+                    setTotalMoney('positive')
+                } else {
+                    setTotalMoney('negative')
+                }
             })
-            .catch((err) => console.log(err.response.data))
+            .catch((err) => console.log(err))
             // eslint-disable-next-line
     }, [reload])
-
-    function calcSum() {
-        let results = 0;
-        for (let i = 0; i < amount.length; i++) {
-            results += amount[i];
-            setSum(results.toFixed(2))
-        }
-        
-        if (results >= 0) {
-            setTotalMoney('positive')
-        } else {
-            setTotalMoney('negative')
-        }
-        // setReload(!reload)
-    }
 
     function removeEntry(id) {
 
