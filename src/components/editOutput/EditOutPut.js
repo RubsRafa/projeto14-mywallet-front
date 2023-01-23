@@ -35,9 +35,9 @@ export default function EditOutput() {
             </TopBar>
             <Inputs>
                 <form onSubmit={editOutput}>
-                    <input onChange={(e) => setValue(e.target.value)} value={value} type='number' step=".01" placeholder="Valor" required></input>
-                    <input onChange={(e) => setDescription(e.target.value)} value={description} type='text' placeholder="Descrição" required></input>
-                    <button type='submit'>Atualizar saída</button>
+                    <input data-test="registry-amount-input" onChange={(e) => setValue(e.target.value)} value={value} type='number' step=".01" placeholder="Valor" required></input>
+                    <input data-test="registry-name-input" onChange={(e) => setDescription(e.target.value)} value={description} type='text' placeholder="Descrição" required></input>
+                    <button data-test="registry-save" type='submit'>Atualizar saída</button>
                 </form>
             </Inputs>
         </>

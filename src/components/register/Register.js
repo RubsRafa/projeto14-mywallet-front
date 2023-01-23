@@ -29,11 +29,11 @@ export default function Register() {
             </Logo>
             <Inputs>
                 <form onSubmit={registration}>
-                    <input onChange={(e) => setName(e.target.value)} value={name} type='text' placeholder="Nome" required></input>
-                    <input onChange={(e) => setEmail(e.target.value)} value={email} type='email' placeholder="E-mail" required></input>
-                    <input onChange={(e) => setPassword(e.target.value)} value={password} type='password' placeholder="Senha" required></input>
-                    <input onChange={(e) => setConfirmation(e.target.value)} value={confirmation} type='password' placeholder="Confirme a senha" required></input>
-                    <button type='submit'>Cadastrar</button>
+                    <input data-test="name" onChange={(e) => setName(e.target.value)} value={name} type='text' placeholder="Nome" required></input>
+                    <input data-test="email" onChange={(e) => setEmail(e.target.value)} value={email} type='email' placeholder="E-mail" required></input>
+                    <input data-test="password" onChange={(e) => setPassword(e.target.value)} value={password} type='password' placeholder="Senha" required></input>
+                    <input data-test="conf-password" onChange={(e) => setConfirmation(e.target.value)} value={confirmation} type='password' placeholder="Confirme a senha" required></input>
+                    <button data-test="sign-up-submit" type='submit'>Cadastrar</button>
                 </form>
             </Inputs>
             <RegisterButton onClick={() => {

@@ -33,9 +33,9 @@ export default function Login() {
             </Logo>
             <Inputs>
                 <form onSubmit={enter}>
-                    <input onChange={(e) => setEmail(e.target.value)} value={email} type='email' placeholder="E-mail" required></input>
-                    <input onChange={(e) => setPassword(e.target.value)} value={password} type='password' placeholder="Senha" required></input>
-                    <button type='submit'>Entrar</button>
+                    <input data-test="email" onChange={(e) => setEmail(e.target.value)} value={email} type='email' placeholder="E-mail" required></input>
+                    <input data-test="password" onChange={(e) => setPassword(e.target.value)} value={password} type='password' placeholder="Senha" required></input>
+                    <button data-test="sign-in-submit" type='submit'>Entrar</button>
                 </form>
             </Inputs>
             <Register onClick={() => {

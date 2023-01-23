@@ -26,7 +26,6 @@ export default function Home() {
 
         axios.get(`${process.env.REACT_APP_API_URL}/entry`, config)
             .then((res) => {
-                console.log(res.data)
                 setBalances(false)
                 setSum(0)
                 if (res.data.myEntry.length !== 0) {
@@ -63,8 +62,8 @@ export default function Home() {
     return (
         <>
             <TopBar>
-                <Welcome>Olá, {name}</Welcome>
-                <img onClick={() => {
+                <Welcome data-test="user-name">Olá, {name}</Welcome>
+                <img data-test="logout" onClick={() => {
                     navigate('/')
                 }} src={LogOut} alt='logout' />
             </TopBar>
@@ -82,7 +81,7 @@ export default function Home() {
                             <Text key={index} cor={i.type}>
                                 <Unite>
                                     <h1>{i.date}</h1>
-                                    <h2 onClick={() => {
+                                    <h2 data-test="registry-name" onClick={() => {
                                         setItem(i)
                                         if (i.type === 'input') {
                                             navigate('/editar-entrada')
@@ -92,8 +91,8 @@ export default function Home() {
                                     }}>{i.description}</h2>
                                 </Unite>
                                 <Unite>
-                                    <h3>{i.value}</h3>
-                                    <h4 onClick={() => removeEntry(i._id)}>x</h4>
+                                    <h3 data-test="registry-amount">{i.value}</h3>
+                                    <h4 data-test="registry-delete" onClick={() => removeEntry(i._id)}>x</h4>
                                 </Unite>
                             </Text>
                         ))
@@ -105,20 +104,20 @@ export default function Home() {
                 {balances &&
                     <Balance cor={totalMoney}>
                         <h1>SALDO</h1>
-                        <h3>{sum}</h3>
+                        <h3 data-test="total-amount">{sum}</h3>
                     </Balance>
                 }
 
 
             </Registers>
             <Options>
-                <Option onClick={() => {
+                <Option data-test="new-income" onClick={() => {
                     navigate('/nova-entrada')
                 }}>
                     <img src={Plus} alt='input' />
                     <h1>Nova entrada</h1>
                 </Option>
-                <Option onClick={() => {
+                <Option data-test="new-expense" onClick={() => {
                     navigate('/nova-saida')
                 }}>
                     <img src={Minus} alt='output' />
